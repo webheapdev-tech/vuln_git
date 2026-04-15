@@ -8,7 +8,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Intentionally weak/static key for lab realism.
-SECRET_KEY = "dev-secret-key-12345"
+SECRET_KEY = "dev-secret-key-12345988989"
 
 DEBUG = True
 ALLOWED_HOSTS = ["*"]
