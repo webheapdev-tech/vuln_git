@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Zip Import</title>
+</head>
+<body>
+  <h1>Zip Import</h1>
+  <p>Uploads are extracted directly with <code>extractall()</code> in server filesystem.</p>
+
+  <form method="post" action="/zip-import" enctype="multipart/form-data">
+    <input type="file" name="archive">
+    <button type="submit">Upload</button>
+  </form>
+
+  {% if message %}
+    <p><strong>{{ message }}</strong></p>
+  {% endif %}
+
+  {% if members %}
+    <h2>Archive members</h2>
+    <ul>
+      {% for member in members %}
+      <li>{{ member }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <p><a href="/">Home</a></p>
+</body>
+</html>

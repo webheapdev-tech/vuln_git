@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>VulnLab</title>
+</head>
+<body>
+  <h1>VulnLab Django Playground</h1>
+
+  {% if user %}
+    <p>Logged in as <strong>{{ user.username }}</strong> (role: {{ user.role }}, balance: {{ user.balance }})</p>
+    <p><a href="/dashboard">Dashboard</a> | <a href="/logout">Logout</a></p>
+  {% else %}
+    <h2>Login</h2>
+    <form action="/login" method="post">
+      {% csrf_token %}
+      <input name="username" placeholder="username">
+      <input name="password" type="password" placeholder="password">
+      <button type="submit">Login</button>
+    </form>
+
+    <h2>Register</h2>
+    <form action="/register" method="post">
+      {% csrf_token %}
+      <input name="username" placeholder="username">
+      <input name="email" placeholder="email">
+      <input name="password" type="password" placeholder="password">
+      <button type="submit">Register</button>
+    </form>
+  {% endif %}
+
+  <h2>Endpoints</h2>
+  <ul>
+    <li><a href="/search?q=ali">/search</a> (SQL Injection)</li>
+    <li><a href="/docs/1">/docs/&lt;id&gt;</a> (IDOR)</li>
+    <li><a href="/transfer">/transfer</a> (CSRF + logic flaws)</li>
+    <li><a href="/comments">/comments</a> (Stored XSS)</li>
+    <li><a href="/diag?host=127.0.0.1">/diag</a> (Command injection)</li>
+    <li><a href="/read-log?name=app.log">/read-log</a> (Path traversal)</li>
+    <li><a href="/fetch?url=http://example.com">/fetch</a> (SSRF)</li>
+    <li><a href="/deserialize">/deserialize</a> (Insecure deserialization)</li>
+    <li><a href="/token-login">/token-login</a> (Unsigned token auth)</li>
+    <li><a href="/eval">/eval</a> (Eval RCE)</li>
+    <li><a href="/zip-import">/zip-import</a> (Zip Slip)</li>
+    <li><a href="/save-note">/save-note</a> (Arbitrary file write)</li>
+    <li><a href="/go?next=https://example.com">/go</a> (Open redirect)</li>
+    <li><a href="/internal/dump?token=dev-secr">/internal/dump</a> (Backdoor)</li>
+  </ul>
+</body>
+</html>

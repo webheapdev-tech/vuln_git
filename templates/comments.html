@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Comments</title>
+</head>
+<body>
+  <h1>Public Comments</h1>
+  <form method="post" action="/comments">
+    {% csrf_token %}
+    <input name="author" placeholder="author">
+    <input name="message" placeholder="message (try script payload)">
+    <button type="submit">Post</button>
+  </form>
+
+  <p><a href="/">Home</a></p>
+
+  <hr>
+  {% for c in comments %}
+    <p>
+      <strong>{{ c.author }}</strong>:
+      {{ c.message|safe }}
+      <small>({{ c.created_at }})</small>
+    </p>
+  {% endfor %}
+</body>
+</html>
